@@ -1,0 +1,20 @@
+{% extends "base.html" %} {% load static %} {% block head %} <link
+rel="stylesheet" href="{% static "css/books/index.css" %}" /> {% endblock head%}
+{% block content %}
+<h2>Library</h2>
+<section class="card-container">
+  {% for book in books %}
+  <a class="card-link" href='{% url "book-detail" book.id %}'>
+    <div class="card">
+      <h3>{{ book.title }}</h3>
+      <p>{{ book.author }}</p>
+      <p>{{ book.genre }}</p>
+      <p>{{ book.year }}</p>
+      <p>{{ book.description }}</p>
+    </div>
+  </a>
+
+  {% endfor %}
+</section>
+
+{% endblock content %}

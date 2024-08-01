@@ -1,0 +1,42 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="{% static "css/base.css" %}" />
+    <title>Book Collector</title>
+    {% block head %} {% endblock %}
+  </head>
+  <body>
+    <header>
+      <a class="logo" href="/">
+        <h1>Book Collector</h1>
+      </a>
+      <nav>
+        <ul>
+          {% if user.is_authenticated %}
+
+          <li><a href="/">Home</a></li>
+          <li><a href="/books">Library</a></li>
+          <li><a href="{% url 'book-create' %}">Add Book</a></li>
+          <li>
+            <form id="logout-form" method="post" action="{% url 'logout' %}">
+              {% csrf_token %}
+              <button type="submit">Log out</button>
+            </form>
+          </li>
+          {% else %}
+
+          <li><a href="/">Login</a></li>
+          <li><a href="{% url 'signup' %}">Sign Up</a></li>
+
+          {% endif %}
+        </ul>
+      </nav>
+    </header>
+    <main>{% block content %} {% endblock %}</main>
+  </body>
+</html>
